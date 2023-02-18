@@ -1,0 +1,28 @@
+// Define the TreeNode class
+function TreeNode(val, left, right) {
+  this.val = (val === undefined ? 0 : val);
+  this.left = (left === undefined ? null : left);
+  this.right = (right === undefined ? null : right);
+}
+
+// Define the invertTree function
+const invertTree = function(root) {
+  // Check if the input node is null or undefined, and return it
+  // This is the base case of the recursion
+  if (root == null) {
+    return null;
+  }
+
+  // Swap the left and right subtrees of the current node
+  const temp = root.left;
+  root.left = invertTree(root.right);
+  root.right = invertTree(temp);
+
+  // Return the modified node
+  return root;
+};
+
+// Usage example
+const root = new TreeNode(4, new TreeNode(2, new TreeNode(1), new TreeNode(3)), new TreeNode(7, new TreeNode(6), new TreeNode(9)));
+const invertedRoot = invertTree(root);
+console.log(invertedRoot);
